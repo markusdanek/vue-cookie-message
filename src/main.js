@@ -1,5 +1,5 @@
-import Hello from './components/Hello.vue';
+import CookieMessage from './components/CookieMessage.vue';
 
 export default {
-  Hello
+  CookieMessage
 };

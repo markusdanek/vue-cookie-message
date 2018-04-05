@@ -1,6 +1,6 @@
 {
   "name": "vue-cookie-message",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Vue.js Cookie Message Plugin for GDPR",
   "jsnext": "dist/bundle.js",
   "main": "dist/bundle.common.js",
@@ -18,7 +18,7 @@
     "dist/",
     "src/"
   ],
-  "author": "Markus Danek <markus.danek-cic@ibm.com>",
+  "author": "Markus Danek <markus.danek@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "lodash": "^4.16.4",
