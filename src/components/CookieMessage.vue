@@ -1,11 +1,11 @@
 <template>
   <div class="cookie-message" :class="containerPosition" v-if="isOpen">
-    <div class="cookie-message__content">
-      <slot name="cookie-message__message">
+    <div class="cookie-message__content item">
+      <slot name="cookie-message__text">
         {{ cookieMessage }}
       </slot>
     </div>
-    <div class="cookie-message__buttons">
+    <div class="cookie-message__buttons item">
       <div :class="cookieButtonClass" @click="acceptGDPR">
         {{ cookieButtonText }}
       </div>
@@ -50,15 +50,15 @@ export default {
   },
   methods: {
     setAccept() {
-      localStorage.setItem('cookie:accepted', true)
+      localStorage.setItem('gdpr:accepted', true);
     },
     getAcceptStatus() {
-      return localStorage.getItem('cookie:accepted')
+      return localStorage.getItem('gdpr:accepted');
     },
     acceptGDPR() {
-      this.setAccept()
-      this.isOpen = false
-      this.$emit('accept')
+      this.setAccept();
+      this.isOpen = false;
+      this.$emit('accept');
     }
   }
 }
@@ -70,10 +70,27 @@ export default {
     overflow: hidden;
     box-sizing: border-box;
     z-index: 1;
-    width: 100%;
-    background: #EEE;
+    background: #000;
     color: #FFF;
     padding: 1.250em 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+  }
+
+  .item {
+    -webkit-order: 0;
+    -ms-flex-order: 0;
+    order: 0;
+    -webkit-flex: 0 1 auto;
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
+    -webkit-align-self: center;
+    -ms-flex-item-align: center;
+    align-self: center;
   }
 
   .cookie-message__top {
@@ -94,9 +111,18 @@ export default {
     padding: 10px;
     border: none;
     border-radius: 0;
+    margin-left: 20px;
   }
   .cookie-message__button:hover {
     background: red;
     color: white;
+  }
+  @media only screen and (max-width: 600px) {
+    .cookie-message {
+      flex-direction: column;
+    }
+    .item {
+      margin-bottom: 20px;
+    }
   }
 </style>
