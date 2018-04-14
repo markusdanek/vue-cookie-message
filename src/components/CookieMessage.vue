@@ -7,7 +7,10 @@
     </div>
     <div class="cookie-message__buttons item">
       <div :class="cookieButtonClass" @click="acceptGDPR">
-        {{ cookieButtonText }}
+        {{ cookieButtonTextAgree }}
+      </div>
+      <div :class="cookieButtonClass" @click="denyGDPR">
+        {{ cookieButtonTextDeny }}
       </div>
     </div>
   </div>
@@ -16,9 +19,13 @@
 <script>
 export default {
   props: {
-    cookieButtonText: {
+    cookieButtonTextAgree: {
       type: String,
       default: 'Accept'
+    },
+    cookieButtonTextDeny: {
+      type: String,
+      default: 'Deny'
     },
     cookieMessage: {
       type: String,
@@ -50,15 +57,23 @@ export default {
   },
   methods: {
     setAccept() {
-      localStorage.setItem('gdpr:accepted', true);
+      localStorage.setItem('gdpr:cookie', true);
+    },
+    setDeny() {
+      localStorage.setItem('gdpr:cookie', false);
     },
     getAcceptStatus() {
-      return localStorage.getItem('gdpr:accepted');
+      return localStorage.getItem('gdpr:cookie');
     },
     acceptGDPR() {
       this.setAccept();
       this.isOpen = false;
       this.$emit('accept');
+    },
+    denyGDPR() {
+      this.setDeny();
+      this.isOpen = false;
+      this.$emit('deny');
     }
   }
 }
